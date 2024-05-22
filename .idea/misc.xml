@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
         <option value="$PROJECT_DIR$/ms-prices/pom.xml" />
         <option value="$PROJECT_DIR$/ms-vehicles/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-repairList/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
