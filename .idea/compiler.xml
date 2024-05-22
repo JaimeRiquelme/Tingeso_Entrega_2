@@ -9,12 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="gateway-server" />
-        <module name="ms-cars" />
         <module name="eureka-server" />
         <module name="ms-vehicles" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ms-cars" target="17" />
       <module name="ms-prices" target="17" />
     </bytecodeTargetLevel>
   </component>

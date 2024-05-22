@@ -21,10 +21,6 @@ spring:
             allowedMethods: "*"
             allowedHeaders: "*"
       routes:
-        - id: ms-cars
-          uri: lb://ms-cars:8090
-          predicates:
-            - Path=/cars/**
         - id: ms-vehicles
           uri: lb://ms-vehicles:8091
           predicates:
