@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class GenerateRepairsController {
 
+    private final GenerateRepairsServices generateRepairsServices;
+
     @Autowired
-    GenerateRepairsServices GenerateRepairsServices;
+    public GenerateRepairsController(GenerateRepairsServices generateRepairsServices) {
+        this.generateRepairsServices = generateRepairsServices;
+    }
 
     @GetMapping("/")
-    public ResponseEntity<Iterable<vehiclesEntity>> listVehicles(){
-        return ResponseEntity.ok(GenerateRepairsServices.listVehicles());
+    public ResponseEntity<Iterable<vehiclesEntity>> listVehicles() {
+        return ResponseEntity.ok(generateRepairsServices.listVehicles());
     }
 }
