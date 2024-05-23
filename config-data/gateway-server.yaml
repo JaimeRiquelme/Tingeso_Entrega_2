@@ -32,4 +32,4 @@ spring:
         - id: ms-repairVehicles
           uri: lb://ms-repairVehicles:8093
           predicates:
-            - Path=/api/v1/generateRepairs/**
+            - Path=/api/v1/repairVehicles/**
