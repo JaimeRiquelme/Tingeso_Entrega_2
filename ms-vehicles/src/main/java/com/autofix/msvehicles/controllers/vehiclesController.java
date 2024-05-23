@@ -8,7 +8,6 @@ import com.autofix.msvehicles.services.vehiclesService;
 
 @RestController
 @RequestMapping("/api/v1/vehicles")
-@CrossOrigin("*")
 public class vehiclesController {
 
     @Autowired

@@ -10,6 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class vehiclesEntity {
+    private long id;
+
     private String patente;
 
     private String marca;

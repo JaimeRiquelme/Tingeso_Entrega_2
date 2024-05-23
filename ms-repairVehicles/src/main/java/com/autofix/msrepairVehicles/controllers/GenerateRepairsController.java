@@ -1,28 +1,48 @@
 package com.autofix.msrepairVehicles.controllers;
 
+import com.autofix.msrepairVehicles.entities.GenerateRepairsEntity;
+import com.autofix.msrepairVehicles.models.RepairsEntity;
 import com.autofix.msrepairVehicles.models.vehiclesEntity;
 import com.autofix.msrepairVehicles.services.GenerateRepairsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/repairVehicles")
-@CrossOrigin("*")
 public class GenerateRepairsController {
 
-    private final GenerateRepairsServices generateRepairsServices;
-
     @Autowired
-    public GenerateRepairsController(GenerateRepairsServices generateRepairsServices) {
-        this.generateRepairsServices = generateRepairsServices;
+    GenerateRepairsServices generateRepairsServices;
+
+    @GetMapping("/PruebaVehicles")
+    public ResponseEntity<Iterable<vehiclesEntity>> listVehicles() {
+        return ResponseEntity.ok(generateRepairsServices.listVehicles());
+    }
+
+    @GetMapping("/PruebaRepairs")
+    public ResponseEntity<List<RepairsEntity>> getGenerateRepairs(){
+        return ResponseEntity.ok(generateRepairsServices.listRepairs());
     }
 
     @GetMapping("/")
-    public ResponseEntity<Iterable<vehiclesEntity>> listVehicles() {
-        return ResponseEntity.ok(generateRepairsServices.listVehicles());
+    public ResponseEntity<List<GenerateRepairsEntity>> listGenerateRepairs() {
+        List<GenerateRepairsEntity> generateRepairs = generateRepairsServices.getGenerateRepairs();
+        return ResponseEntity.ok(generateRepairs);
+    }
+
+    @PostMapping("/{uso_bono}")
+    public ResponseEntity<Map<String, Object>> saveGenerateRepair(@RequestBody GenerateRepairsEntity generateRepair, @PathVariable boolean uso_bono) {
+        Map<String, Object> response = generateRepairsServices.saveGenerateRepairs(generateRepair, uso_bono);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{idReparacion}")
+    public ResponseEntity<GenerateRepairsEntity> getGenerateRepair(@PathVariable int idReparacion) {
+        GenerateRepairsEntity generateRepair = generateRepairsServices.getGenerateRepairsById(idReparacion);
+        return ResponseEntity.ok(generateRepair);
     }
 }
