@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "ms-repairVehicles", path = "/api/v1/repairVehicles")
+@FeignClient(name = "ms-repairVehicles", path = "/api/v1/repairs/repairVehicles")
 public interface RepairVehiclesFeignClient {
 
     @GetMapping("/Report1")

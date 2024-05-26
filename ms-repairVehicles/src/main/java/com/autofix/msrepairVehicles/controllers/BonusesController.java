@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/bonuses")
+@RequestMapping("/api/v1/repairs/bonuses")
 public class BonusesController {
     @Autowired
     BonusesServices bonusesServices;

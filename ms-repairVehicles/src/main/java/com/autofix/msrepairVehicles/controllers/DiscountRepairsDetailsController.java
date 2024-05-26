@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.autofix.msrepairVehicles.entities.GenerateRepairsDetailsEntity;
 
 @RestController
-@RequestMapping("/api/v1/discountrepairsdetails")
+@RequestMapping("/api/v1/repairs/discountrepairsdetails")
 public class DiscountRepairsDetailsController {
 
     @Autowired
