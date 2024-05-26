@@ -45,4 +45,16 @@ public class GenerateRepairsController {
         GenerateRepairsEntity generateRepair = generateRepairsServices.getGenerateRepairsById(idReparacion);
         return ResponseEntity.ok(generateRepair);
     }
+
+    @GetMapping("/Report1")
+    public ResponseEntity<List<Object[]>> getReport1() {
+        List<Object[]> report = generateRepairsServices.generarReporte();
+        return ResponseEntity.ok(report);
+    }
+
+    @GetMapping("/Report2")
+    public ResponseEntity<List<Object[]>> getReport2(@RequestParam int year, @RequestParam int month) {
+        List<Object[]> report = generateRepairsServices.GenerarReporte2(year, month);
+        return ResponseEntity.ok(report);
+    }
 }

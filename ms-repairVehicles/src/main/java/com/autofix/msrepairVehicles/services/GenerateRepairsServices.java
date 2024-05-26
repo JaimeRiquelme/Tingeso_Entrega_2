@@ -44,6 +44,12 @@ public class GenerateRepairsServices {
     @Autowired
     private GenerateRepairsDetailsRepository generateRepairsDetailsRepository;
 
+    @Autowired
+    ReparacionesTempRepository reparacionTempRepository;
+
+    @Autowired
+    VehicleTempRepository VehicleTempRepository;
+
 
     //Metodo para obtener todas las reparaciones generadas
     public ArrayList<GenerateRepairsEntity> getGenerateRepairs(){
@@ -291,5 +297,54 @@ public class GenerateRepairsServices {
 
     public List<RepairsEntity> listRepairs(){
         return repairListFeignClient.listRepairs();
+    }
+
+    public List<Object[]> generarReporte() {
+        // Obtener lista de reparaciones
+        List<RepairsEntity> reparacionesLista = repairListFeignClient.listRepairs();
+        Iterable<vehiclesEntity> vehiculos = vehiclesFeignClient.listVehicles();
+
+        crearTablaReparacionesTemporal(reparacionesLista);
+        crearTablaVehiculosTemporal(vehiculos);
+
+        return generateRepairsRepository.GenerateReport1();
+
+    }
+
+    private void crearTablaReparacionesTemporal(List<RepairsEntity> reparacionesLista) {
+        // Borrar la tabla temporal si existe
+        reparacionTempRepository.deleteAll();
+
+        // Crear la tabla temporal
+        for (RepairsEntity reparacion : reparacionesLista){
+            ReparacionTempEntity reparacionTemp = new ReparacionTempEntity();
+            reparacionTemp.setId(reparacion.getId());
+            reparacionTemp.setNombre(reparacion.getType());
+            reparacionTemp.setCost_diesel(reparacion.getCost_diesel());
+            reparacionTemp.setCost_electric(reparacion.getCost_electric());
+            reparacionTemp.setCost_gasoline(reparacion.getCost_gasoline());
+            reparacionTemp.setCost_hybrid(reparacion.getCost_hybrid());
+            reparacionTemp.setCost_electric(reparacion.getCost_electric());
+            reparacionTempRepository.save(reparacionTemp);
+        }
+
+
+    }
+
+    private void crearTablaVehiculosTemporal(Iterable<vehiclesEntity> vehiculos) {
+        // Borrar la tabla temporal si existe
+        VehicleTempRepository.deleteAll();
+
+        for (vehiclesEntity vehiculo : vehiculos){
+            VehicleTempEntity vehiculoTemp = new VehicleTempEntity();
+            vehiculoTemp.setPatente(vehiculo.getPatente());
+            vehiculoTemp.setTipo(vehiculo.getTipo());
+            vehiculoTemp.setTipo_motor(vehiculo.getTipo_motor());
+            VehicleTempRepository.save(vehiculoTemp);
+        }
+    }
+
+    public List<Object[]> GenerarReporte2(int year, int month) {
+        return generateRepairsRepository.GenerateReport2(year, month, month - 1, month + 1);
     }
 }
