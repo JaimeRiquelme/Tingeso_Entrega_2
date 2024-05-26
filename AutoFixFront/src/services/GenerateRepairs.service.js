@@ -17,11 +17,16 @@ const getGenerateRepairsById = (id) => {
 }
 
 const getGenerateRepairsGroupByTipe = () => {
-    return httpCommon.get("api/v1/repairVehicles/Report1");
+    return httpCommon.get("api/v1/reports/Report1");
 }
 
-const getGenerateRepairsGroupByCombustible = () => {
-    return httpCommon.get("api/v1/repairVehicles/GenerateGroupByCombustible");
+const getGenerateRepairsGroupByCombustible = (year, month) => {
+    return httpCommon.get("api/v1/reports/Report2", {
+        params: {
+            year: year,
+            month: month
+        }
+    });
 }
 
 const getAll = () => {
