@@ -8,11 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="ms-repairList" />
         <module name="gateway-server" />
         <module name="ms-repairVehicles" />
-        <module name="ms-repairList" />
         <module name="eureka-server" />
         <module name="ms-vehicles" />
+        <module name="ms-reports" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -29,6 +30,7 @@
       <module name="ms-prices" options="-parameters" />
       <module name="ms-repairList" options="-parameters" />
       <module name="ms-repairVehicles" options="-parameters" />
+      <module name="ms-reports" options="-parameters" />
       <module name="ms-vehicles" options="-parameters" />
     </option>
   </component>
