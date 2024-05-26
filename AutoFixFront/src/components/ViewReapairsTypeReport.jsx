@@ -17,29 +17,39 @@ const ViewRepairsTypeReport = () => {
         fetchData();
     }, []);
 
-
+    const rows = data.flatMap((item, index) => [
+        {
+            id: `${index}-count`,
+            name: item[0],
+            sedan: item[1],
+            hatchback: item[3],
+            suv: item[5],
+            pickUp: item[7],
+            furgoneta: item[9],
+            total: item[12],
+        },
+        {
+            id: `${index}-total`,
+            name: '',
+            sedan: `$${item[2].toLocaleString()}`,
+            hatchback: `$${item[4].toLocaleString()}`,
+            suv: `$${item[6].toLocaleString()}`,
+            pickUp: `$${item[8].toLocaleString()}`,
+            furgoneta: `$${item[10].toLocaleString()}`,
+            total: `$${item[11].toLocaleString()}`,
+            
+        }
+    ]);
 
     const columns = [
-        { field: 'name' , headerName: 'Nombre', width: 150 },
-        { field: 'sedan', headerName: 'Sedan', width: 150, type: 'number' },
-        { field: 'hatchback', headerName: 'Hatchback', width: 150, type: 'number' },
-        { field: 'suv', headerName: 'SUV', width: 150, type: 'number' },
-        { field: 'pickup', headerName: 'PickUp', width: 150, type: 'number' },
-        { field: 'furgoneta', headerName: 'Furgoneta', width: 150, type: 'number' },
-        { field: 'cost', headerName: 'Costo Total', width: 150, type: 'number' }
+        { field: 'name', headerName: 'Tipo de reparación', width: 250 },
+        { field: 'sedan', headerName: 'Sedan', width: 150 },
+        { field: 'hatchback', headerName: 'Hatchback', width: 150 },
+        { field: 'suv', headerName: 'SUV', width: 150 },
+        { field: 'pickUp', headerName: 'Pick Up', width: 150 },
+        { field: 'furgoneta', headerName: 'Furgoneta', width: 150 },
+        { field: 'total', headerName: 'Total', width: 150 }
     ];
-
-
-    const rows = data.map((item, index) => ({
-        id: index,
-        name: item[0],
-        sedan: item[1],
-        hatchback: item[2],
-        suv: item[3],
-        pickup: item[4],
-        furgoneta: item[5],
-        cost: item[6]
-    }));
 
     return (
         <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
@@ -48,13 +58,28 @@ const ViewRepairsTypeReport = () => {
                 height={400}
                 margin={{ top: 45, right: 10, left: 10, bottom: 30 }}
                 xAxis={[{ scaleType: 'band', dataKey: 'name', align: 'center' }]}
-                dataset={data.map(item => ({ name: item[0], sedan: item[1], hatchback: item[2], suv: item[3], pickUp: item[4], furgoneta: item[5], cost: item[6] }))}
+                dataset={data.map(item => ({
+                    name: item[0], 
+                    sedan: item[1], 
+                    montoSedan: item[2], 
+                    hatchback: item[3], 
+                    montoHatchback: item[4], 
+                    suv: item[5], 
+                    montoSuv: item[6], 
+                    pickUp: item[7], 
+                    montoPickUp: item[8], 
+                    furgoneta: item[9], 
+                    montoFurgoneta: item[10], 
+                    cost: item[11]
+                    
+                }))}
                 series={[
-                {
-                    dataKey: 'cost',
-                    label: 'Total',
-                    valueFormatter: (value) => `$${value}`
-                }]}
+                    {
+                        dataKey: 'cost',
+                        label: 'Total',
+                        valueFormatter: (value) => `$${value}`
+                    }
+                ]}
             />
             <Box sx={{ height: 400, width: '100%', marginTop: 2 }}>
                 <DataGrid
@@ -66,8 +91,6 @@ const ViewRepairsTypeReport = () => {
             </Box>
         </Box>
     );
-
-    
 };
 
 export default ViewRepairsTypeReport;

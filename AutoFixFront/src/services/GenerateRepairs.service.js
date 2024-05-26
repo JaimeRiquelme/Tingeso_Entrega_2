@@ -17,7 +17,7 @@ const getGenerateRepairsById = (id) => {
 }
 
 const getGenerateRepairsGroupByTipe = () => {
-    return httpCommon.get("api/v1/repairVehicles/GenerateGroupByTipoReparacion");
+    return httpCommon.get("api/v1/repairVehicles/Report1");
 }
 
 const getGenerateRepairsGroupByCombustible = () => {

@@ -51,12 +51,6 @@ export default function Sidemenu({ open, toggleDrawer }) {
           </ListItemIcon>
           <ListItemText primary="Ver Reparaciones" />
         </ListItemButton>
-        <ListItemButton onClick={() => navigate("/GenerateRepair/AVGHourReport")}>
-          <ListItemIcon>
-          <PlusIcon/>
-          </ListItemIcon>
-          <ListItemText primary="Reporte de horas promedio" />
-        </ListItemButton>
         <ListItemButton onClick={() => navigate("/GenerateRepair/ViewRepairsTypeReport")}>
           <ListItemIcon>
           <PlusIcon/>
