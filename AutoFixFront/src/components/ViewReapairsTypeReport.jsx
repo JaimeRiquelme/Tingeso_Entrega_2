@@ -4,18 +4,34 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
-
-
 const ViewRepairsTypeReport = () => {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await GenerateRepairsService.getGenerateRepairsGroupByTipe();
-            setData(response.data);
+            try {
+                const response = await GenerateRepairsService.getGenerateRepairsGroupByTipe();
+                setData(response.data);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
         };
         fetchData();
     }, []);
+
+    const loadingStyle = {
+        fontSize: '2em', 
+        fontWeight: 'bold', 
+        textAlign: 'center', 
+        marginTop: '20%' 
+    };
+
+    if (loading) return <div style={loadingStyle} >Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
 
     const rows = data.flatMap((item, index) => [
         {

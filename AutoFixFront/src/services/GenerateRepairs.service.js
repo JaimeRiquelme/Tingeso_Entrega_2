@@ -1,19 +1,19 @@
 import httpCommon from "../http-common";
 
 const generateRepairs = (data,uso_bono) => {
-    return httpCommon.post(`api/v1/repairVehicles/${uso_bono}`, data);
+    return httpCommon.post(`api/v1/repairs/repairVehicles/${uso_bono}`, data);
 }
 
 const getGenerateRepairs = () => {
-    return httpCommon.get("api/v1/repairVehicles/");
+    return httpCommon.get("api/v1/repairs/repairVehicles/");
 }
 
 const getReportAvgHours = () => {
-    return httpCommon.get("api/v1/repairVehicles/promedioHorasPorMarca");
+    return httpCommon.get("api/v1/repairs/repairVehicles/promedioHorasPorMarca");
 }
 
 const getGenerateRepairsById = (id) => {
-    return httpCommon.get(`api/v1/repairVehicles/${id}`);
+    return httpCommon.get(`api/v1/repairs/repairVehicles/${id}`);
 }
 
 const getGenerateRepairsGroupByTipe = () => {
@@ -30,7 +30,7 @@ const getGenerateRepairsGroupByCombustible = (year, month) => {
 }
 
 const getAll = () => {
-    return httpCommon.get("api/v1/repairVehicles/");
+    return httpCommon.get("api/v1/repairs/repairVehicles/");
 };
 
 export default {
