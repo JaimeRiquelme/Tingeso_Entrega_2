@@ -1,21 +1,21 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: ms-repairVehicles-deployment
+  name: ms-repairvehicles-deployment
   labels:
-    app: ms-repairVehicles-deployment
+    app: ms-repairvehicles-deployment
 spec:
   selector:
     matchLabels:
-      app: ms-repairVehicles-deployment
+      app: ms-repairvehicles-deployment
   replicas: 1
   template:
     metadata:
       labels:
-        app: ms-repairVehicles-deployment
+        app: ms-repairvehicles-deployment
     spec:
       containers:
-        - name: ms-repairVehicles
+        - name: ms-repairvehicles
           image: jaimeriquelme/ms-repairvehicles
           ports:
             - containerPort: 8093

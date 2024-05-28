@@ -8,7 +8,7 @@ data:
   DB_HOST_REPAIRLIST: repairlist-db-service
   DB_PORT_REPAIRLIST: "5432"
   DB_NAME_REPAIRLIST: repair-list-db
-  DB_HOST_REPAIRVEHICLE: repairvehicle-db-service
+  DB_HOST_REPAIRVEHICLE: repairvehicles-db-service
   DB_PORT_REPAIRVEHICLE: "5432"
   DB_NAME_REPAIRVEHICLE: repair-vehicle-db
   DB_HOST_VEHICLES: vehicles-db-service
