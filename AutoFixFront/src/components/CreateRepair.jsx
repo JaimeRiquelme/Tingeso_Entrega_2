@@ -3,19 +3,17 @@ import VehicleService from "../services/Vehicle.service";
 import RepairService from "../services/Repairs.service";
 
 import { useState, useEffect } from "react";
-import { Box, FormControl, TextField, Button } from "@mui/material";
+import { Box, FormControl, TextField, Button, CircularProgress } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import { Select, MenuItem, InputLabel } from "@mui/material";
 import { Checkbox, ListItemText, OutlinedInput } from "@mui/material";
 import { FormControlLabel } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 
-
 const CreateRepair = () => {
   const [fecha_ingreso_taller, setFechaIngresoTaller] = useState("");
   const [hora_ingreso_taller, setHoraIngresoTaller] = useState("");
-  const [tiposReparacionSeleccionados, setTiposReparacionSeleccionados] =
-    useState([]);
+  const [tiposReparacionSeleccionados, setTiposReparacionSeleccionados] = useState([]);
   const [reparaciones, setReparaciones] = useState([]);
   const [fecha_salida_reparacion, setFechaSalidaReparacion] = useState("");
   const [hora_salida_reparacion, setHoraSalidaReparacion] = useState("");
@@ -24,6 +22,7 @@ const CreateRepair = () => {
   const [patente_vehiculo, setPatenteVehiculo] = useState("");
   const [patentes, setPatentes] = useState([]);
   const [usar_bono, setUsarBono] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  // Estado para manejar la carga
 
   const navigate = useNavigate();
 
@@ -60,11 +59,11 @@ const CreateRepair = () => {
     setTiposReparacionSeleccionados(
       typeof value === "string" ? value.split(",") : value
     );
-
   };
 
   const saveCreateRepair = (e) => {
     e.preventDefault();
+    setIsLoading(true); // Mostrar cargando
 
     const idsAEnviar = tiposReparacionSeleccionados
       .map((nombre) => reparaciones.find((tipo) => tipo.nombre === nombre).id)
@@ -96,42 +95,47 @@ const CreateRepair = () => {
         console.log("Reparacion creada con éxito", response.data);
         console.log("Total de Descuentos recibidos:", response.data.totalDescuentos);
         console.log("Total de Recargos recibidos:", response.data.totalRecargos);
-        console.log("Descuento por bono:", response.data.descuentoBono)
-        console.log("Iva:", response.data.iva)
-        console.log("Monto Reparaciones:", response.data.montoReparaciones)
+        console.log("Descuento por bono:", response.data.descuentoBono);
+        console.log("Iva:", response.data.iva);
+        console.log("Monto Reparaciones:", response.data.montoReparaciones);
 
-        navigate("/GenerateRepair/ViewNewRepair", { state: {
-          repairId: response.data.generateRepair.id,
-          totalDescuentos: response.data.totalDescuentos,
-          totalRecargos: response.data.totalRecargos,
-          descuentoBono: response.data.descuentoBono,
-          iva: response.data.iva,
-          montoReparaciones: response.data.montoReparaciones
-         } })
+        navigate("/GenerateRepair/ViewNewRepair", {
+          state: {
+            repairId: response.data.generateRepair.id,
+            totalDescuentos: response.data.totalDescuentos,
+            totalRecargos: response.data.totalRecargos,
+            descuentoBono: response.data.descuentoBono,
+            iva: response.data.iva,
+            montoReparaciones: response.data.montoReparaciones
+          }
+        });
       })
       .catch((error) => {
         console.log("Error al crear la reparacion", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Ocultar cargando
       });
   };
 
   return (
     <Box
-    display="flex"
-    flexDirection="column"
-    width={600}
-    alignItems="center"
-    justifyContent="center"
-    component="form"
-    onSubmit={saveCreateRepair}
-    sx={{
-      border: '1px solid #ccc', 
-      boxShadow: '0px 0px 10px rgba(0,0,0,0.1)', 
-      borderRadius: '8px', 
-      bgcolor: 'background.paper', 
-      p: 3, 
-      mt: 2 
-    }}
-  >
+      display="flex"
+      flexDirection="column"
+      width={600}
+      alignItems="center"
+      justifyContent="center"
+      component="form"
+      onSubmit={saveCreateRepair}
+      sx={{
+        border: '1px solid #ccc',
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
+        borderRadius: '8px',
+        bgcolor: 'background.paper',
+        p: 3,
+        mt: 2
+      }}
+    >
       <h3>Registrar Reparación</h3>
       <hr />
       <FormControl fullWidth margin="normal">
@@ -242,7 +246,7 @@ const CreateRepair = () => {
           labelId="patente_vehiculo-label"
           id="patente_vehiculo"
           value={patente_vehiculo}
-          onChange={(e) => setPatenteVehiculo(e.target.value)} 
+          onChange={(e) => setPatenteVehiculo(e.target.value)}
           label="Patente"
           required
         >
@@ -283,14 +287,14 @@ const CreateRepair = () => {
             patente_vehiculo
             && fecha_ingreso_taller <= fecha_salida_reparacion
             && fecha_salida_reparacion <= fecha_entrega_cliente
-          
+
           ) {
             saveCreateRepair(e);
           } else {
-            if(fecha_ingreso_taller > fecha_salida_reparacion || fecha_salida_reparacion > fecha_entrega_cliente || fecha_entrega_cliente > fecha_ingreso_taller){
+            if (fecha_ingreso_taller > fecha_salida_reparacion || fecha_salida_reparacion > fecha_entrega_cliente || fecha_entrega_cliente > fecha_ingreso_taller) {
               alert("Debe ingresar las fechas correctamente.");
             }
-            else{
+            else {
               alert("Debe completar todos los campos");
             }
             e.preventDefault();
@@ -300,6 +304,13 @@ const CreateRepair = () => {
       >
         Guardar
       </Button>
+
+      {isLoading && (
+        <Box display="flex" alignItems="center" mt={2}>
+          <CircularProgress size={24} />
+          <Box ml={1}>Cargando...</Box>
+        </Box>
+      )}
     </Box>
   );
 };

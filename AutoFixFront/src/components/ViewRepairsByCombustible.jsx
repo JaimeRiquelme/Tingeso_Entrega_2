@@ -8,6 +8,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const monthNames = [
     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -19,6 +20,8 @@ const ViewRepairsByCombustible = () => {
     const [selectedYear, setSelectedYear] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleYearChange = (event) => {
         setSelectedYear(event.target.value);
@@ -29,12 +32,19 @@ const ViewRepairsByCombustible = () => {
     };
 
     const handleSubmit = async () => {
+        setIsLoading(true);
+        setIsSubmitted(false);
+        setError(null);
+
         try {
             const response = await GenerateRepairsService.getGenerateRepairsGroupByCombustible(selectedYear, selectedMonth);
             setData(response.data);
             setIsSubmitted(true);
         } catch (error) {
+            setError(error);
             console.error("Error fetching data:", error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -109,7 +119,16 @@ const ViewRepairsByCombustible = () => {
                     Obtener Datos
                 </Button>
             </Box>
-            {!isSubmitted ? (
+            {isLoading ? (
+                <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
+                    <CircularProgress size={50} />
+                    <Box ml={2}>Cargando...</Box>
+                </Box>
+            ) : error ? (
+                <Typography variant="h6" color="error" sx={{ mt: 2 }}>
+                    Error: {error.message}
+                </Typography>
+            ) : !isSubmitted ? (
                 <Typography variant="h6" sx={{ mt: 2 }}>
                     Seleccione el mes y el año para ver el reporte.
                 </Typography>

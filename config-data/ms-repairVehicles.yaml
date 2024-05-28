@@ -1,10 +1,10 @@
 server:
-  port: 8093
+  port: ${SERVER_PORT}
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/repair-vehicles-db
-    username: postgres
-    password: 210273
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_DBNAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,4 +15,4 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      default-zone: http://localhost:8761/eureka/
+      default-zone: http://eureka-server-service:8761/eureka/

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { DataGrid } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ViewRepairsTypeReport = () => {
     const [data, setData] = useState([]);
@@ -30,7 +31,12 @@ const ViewRepairsTypeReport = () => {
         marginTop: '20%' 
     };
 
-    if (loading) return <div style={loadingStyle} >Loading...</div>;
+    if (loading) return (
+        <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
+            <CircularProgress size={50} />
+            <Box ml={2}>Cargando...</Box>
+        </Box>
+    );
     if (error) return <div>Error: {error.message}</div>;
 
     const rows = data.flatMap((item, index) => [
