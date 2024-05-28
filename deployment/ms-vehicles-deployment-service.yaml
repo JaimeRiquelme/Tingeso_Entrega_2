@@ -21,7 +21,7 @@ spec:
             - containerPort: 8091
           env:
             - name: SERVER_PORT
-              value: "8091"
+              value: "0"
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
