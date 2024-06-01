@@ -24,6 +24,9 @@ const Home = () => {
         <Button variant="contained" size="large" onClick={() => navigate("/bonuses/add")} style={{ width: 250 }}>
           Ver y Actualizar Bonos
         </Button>
+        <Button variant="contained" size="large" onClick={() => navigate("/repairsType/list")} style={{ width: 250 }}>
+          Ver y Actualizar Tipos de Reparaciones
+        </Button>
         <Button variant="contained" size="large" onClick={() => navigate("/GenerateRepair/add")} style={{ width: 250 }}>
           Registrar Reparación
         </Button>

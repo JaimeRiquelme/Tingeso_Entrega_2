@@ -13,6 +13,9 @@ import ViewRepairsTypeReport from './components/ViewReapairsTypeReport';
 import ViewRepairsByCombustible from './components/ViewRepairsByCombustible';
 import RepairList from './components/RepairsList';
 import ViewRepairsDetails from './components/ViewRepairsDetails';
+import ListRepairsType from './components/ListRepairsType';
+import UpdateRepairType from './components/UpdateRepairType';
+import AddRepairType from './components/addRepairType';
 
 function App() {
   return (
@@ -32,6 +35,9 @@ function App() {
               <Route path = "/GenerateRepair/ViewRepairsByCombustible" element={<ViewRepairsByCombustible/>} />
               <Route path = "/repairs/list" element={<RepairList/>} />
               <Route path = "/repairs/details/:id" element={<ViewRepairsDetails/>} />
+              <Route path = "/repairsType/list" element={<ListRepairsType/>} />
+              <Route path = "/repairsType/edit/:id" element={<UpdateRepairType/>} />
+              <Route path = "/repairsType/add" element={<AddRepairType/>} />
             </Routes>
           </div>
       </Router>

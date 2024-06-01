@@ -63,6 +63,13 @@ export default function Sidemenu({ open, toggleDrawer }) {
           </ListItemIcon>
           <ListItemText primary="Reporte Reparaciones por combustible" />
         </ListItemButton>
+        <ListItemButton onClick={() => navigate("/repairsType/list")}>
+          <ListItemIcon>
+          <PlusIcon/>
+          </ListItemIcon>
+          <ListItemText primary="Ver y Actualizar Tipos de Reparaciones" />
+        </ListItemButton>
+        
         
       </List>
       <Divider />
