@@ -31,16 +31,13 @@ const Home = () => {
           Registrar Reparación
         </Button>
         <Button variant="contained" size="large" onClick={() => navigate("/repairs/list")} style={{ width: 250 }}>
-          Ver Reparaciones
-        </Button>
-        <Button variant="contained" size="large" onClick={() => navigate("/GenerateRepair/AVGHourReport")} style={{ width: 250 }}>
-          Reporte de horas promedio
+          Ver Reparaciones Realizadas
         </Button>
         <Button variant="contained" size="large" onClick={() => navigate("/GenerateRepair/ViewRepairsTypeReport")} style={{ width: 250 }}>
           Reporte Reparaciones vs Tipo
         </Button>
         <Button variant="contained" size="large" onClick={() => navigate("/GenerateRepair/ViewRepairsByCombustible")} style={{ width: 250 }}>
-          Reporte Reparaciones por combustible
+          Reporte de Variación Mensual
         </Button>
       </Stack>
     </div>

@@ -31,7 +31,7 @@ export default function Sidemenu({ open, toggleDrawer }) {
           <ListItemIcon>
           <PlusIcon/>
           </ListItemIcon>
-          <ListItemText primary="Ver vehículos" />
+          <ListItemText primary="Ver listado vehículos" />
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/bonuses/add")}>
           <ListItemIcon>
@@ -45,11 +45,17 @@ export default function Sidemenu({ open, toggleDrawer }) {
           </ListItemIcon>
           <ListItemText primary="Registrar Reparación" />
         </ListItemButton>
+        <ListItemButton onClick={() => navigate("/repairsType/list")}>
+          <ListItemIcon>
+          <PlusIcon/>
+          </ListItemIcon>
+          <ListItemText primary="Ver y Actualizar Tipos de Reparaciones" />
+        </ListItemButton>
         <ListItemButton onClick={() => navigate("/repairs/list")}>
           <ListItemIcon>
           <PlusIcon/>
           </ListItemIcon>
-          <ListItemText primary="Ver Reparaciones" />
+          <ListItemText primary="Ver Reparaciones realizadas" />
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/GenerateRepair/ViewRepairsTypeReport")}>
           <ListItemIcon>
@@ -61,13 +67,7 @@ export default function Sidemenu({ open, toggleDrawer }) {
           <ListItemIcon>
           <PlusIcon/>
           </ListItemIcon>
-          <ListItemText primary="Reporte Reparaciones por combustible" />
-        </ListItemButton>
-        <ListItemButton onClick={() => navigate("/repairsType/list")}>
-          <ListItemIcon>
-          <PlusIcon/>
-          </ListItemIcon>
-          <ListItemText primary="Ver y Actualizar Tipos de Reparaciones" />
+          <ListItemText primary="Reporte de Variación Mensual" />
         </ListItemButton>
         
         
